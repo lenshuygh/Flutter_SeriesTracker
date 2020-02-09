@@ -30,8 +30,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<ListTile> _seriesTitles = <ListTile>[];
   final dateFormat = new DateFormat('dd/MM/yyyy');
 
+  _MyHomePageState(){
+    _fillSeriesTitles();
+  }
+
   void _fillSeriesTitles() {
-    _seriesTitles.clear();
     _seriesTitles.add(_title('Star Trek: Picard', DateTime.parse("2020-01-23"),
         "assets/images/icons/picard.jpg"));
     _seriesTitles.add(_title('The New Pope', DateTime.parse("2020-01-23"),
@@ -41,14 +44,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _addSeriesEntry() {
+    Toast.show("Adding title...", context,
+        duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _seriesTitles.add(_title('New Series', DateTime.now(),
-          "assets/images/icons/westworld.jpg"));
+      _seriesTitles.add(_title(
+          'New Series', DateTime.now(), "assets/images/icons/westworld.jpg"));
     });
   }
 
@@ -60,7 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    _fillSeriesTitles();
+
+
+    //_fillSeriesTitles();
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -68,10 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView.separated(
-          itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.all(1.0),
-                child: Center(child: _seriesTitles.elementAt(index)),
-              ),
+          itemBuilder: (context, index) => (_seriesTitles.elementAt(index)),
           separatorBuilder: (context, index) => Divider(
                 color: Colors.black12,
               ),
@@ -94,27 +99,30 @@ class _MyHomePageState extends State<MyHomePage> {
             )),
         subtitle: Text(dateFormat.format(startDate),
             style: TextStyle(
-              fontSize: 11,
+              fontSize: 9,
             )),
-        leading:
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: 44,
-                minHeight: 44,
-                maxWidth: 64,
-                maxHeight: 64,
-              ),
-              child: Image.asset(imageUrl,fit: BoxFit.cover),
-            ),
+        leading: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: 44,
+            minHeight: 44,
+            maxWidth: 64,
+            maxHeight: 64,
+          ),
+          child: Image.asset(imageUrl, fit: BoxFit.cover),
+        ),
         onTap: () {
-          /*setState(() {
+          setState(() {
             print(title);
-          });*/
+          });
           Toast.show("Clicked on " + title, context,
               duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
         },
         onLongPress: () {
-          setState(() {});
+          Toast.show("removing  " + title, context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          setState(() {
+            _seriesTitles.removeLast();
+          });
         },
       );
 }
