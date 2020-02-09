@@ -107,13 +107,18 @@ class _MyHomePageState extends State<MyHomePage> {
               fontWeight: FontWeight.w500,
               fontSize: 20,
             )),
-        subtitle: Text(dateFormat.format(startDate)),
+        subtitle: Text(dateFormat.format(startDate),style: TextStyle(fontSize: 11,)),
         leading: CircleAvatar(backgroundImage: AssetImage(imageUrl)),
         onTap: (){
           /*setState(() {
             print(title);
           });*/
           Toast.show("Clicked on " + title, context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+        },
+        onLongPress: () {
+          setState(() {
+
+          });
         },
       );
 }
