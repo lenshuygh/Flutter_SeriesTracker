@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView.separated(
           itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(1.0),
                 child: Center(child: _seriesTitles.elementAt(index)),
               ),
           separatorBuilder: (context, index) => Divider(
@@ -97,7 +97,16 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(
               fontSize: 11,
             )),
-        leading: CircleAvatar(backgroundImage: AssetImage(imageUrl)),
+        leading:
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: 44,
+                minHeight: 44,
+                maxWidth: 64,
+                maxHeight: 64,
+              ),
+              child: Image.asset(imageUrl,fit: BoxFit.cover),
+            ),
         onTap: () {
           /*setState(() {
             print(title);
