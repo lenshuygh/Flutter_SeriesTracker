@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _fillSeriesTitles() {
+    _seriesTitles.clear();
     _seriesTitles.add(_title('Star Trek: Picard', DateTime.parse("2020-01-23"),
         "assets/images/icons/picard.jpg"));
     _seriesTitles.add(_title('The New Pope', DateTime.parse("2020-01-23"),
@@ -61,15 +62,25 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     _fillSeriesTitles();
+    print('length list -> ' + _seriesTitles.length.toString());
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: ListView(
+      /*body: ListView(
           children: _seriesTitles
-      ),
+      ),*/
+      body:
+          ListView.builder(
+            itemCount: _seriesTitles.length,
+            itemBuilder: (context,index) => Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(child: _seriesTitles.elementAt(index)),
+            ),
+          ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Add series',
