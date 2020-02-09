@@ -29,7 +29,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<ListTile> _seriesTitles = <ListTile>[];
   final dateFormat = new DateFormat('dd/MM/yyyy');
-  int _counter = 0;
 
   void _fillSeriesTitles() {
     _seriesTitles.clear();
@@ -41,15 +40,15 @@ class _MyHomePageState extends State<MyHomePage> {
         "assets/images/icons/westworld.jpg"));
   }
 
-  void _incrementCounter() {
+  void _addSeriesEntry() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
-      print('CLICK' + _counter.toString());
+      _seriesTitles.add(_title('New Series', DateTime.now(),
+          "assets/images/icons/westworld.jpg"));
     });
   }
 
@@ -79,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
           itemCount: _seriesTitles.length),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _addSeriesEntry,
         tooltip: 'Add series',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
