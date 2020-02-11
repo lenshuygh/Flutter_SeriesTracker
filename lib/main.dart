@@ -104,10 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _removeFromList(String title) {
     var index = -1;
-    Text txt;
+    Text titleFromListElement;
     for (var i = 0; i < _seriesTitles.length; i++) {
-      txt = _seriesTitles[i].title;
-      if (txt.data == title) {
+      titleFromListElement = _seriesTitles[i].title;
+      if (titleFromListElement.data == title) {
         index = i;
         break;
       }
