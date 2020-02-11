@@ -111,17 +111,22 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Image.asset(imageUrl, fit: BoxFit.cover),
         ),
         onTap: () {
-          setState(() {
-            print(title);
-          });
           Toast.show("Clicked on " + title, context,
               duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
         },
         onLongPress: () {
-          Toast.show("removing  " + title, context,
-              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
           setState(() {
-            _seriesTitles.removeLast();
+            var index = -1;
+            Text txt;
+            for(var i = 0; i < _seriesTitles.length; i++){
+              txt = _seriesTitles[i].title;
+              if(txt.data == title){
+                index= i;
+                break;
+              }
+            }
+            print('index: ' + index.toString());
+            _seriesTitles.removeAt(index);
           });
         },
       );
