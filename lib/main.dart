@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
@@ -46,9 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
   void _addSeriesEntry() {
     Toast.show("Adding title...", context,
         duration: Toast.LENGTH_SHORT, gravity: Toast.CENTER);
+    final _random = new Random();
     setState(() {
       _seriesTitles.add(_title(
-          'New Series', DateTime.now(), "assets/images/icons/westworld.jpg"));
+          'New Series' + _random.nextInt(99).toString(), DateTime.now(), "assets/images/icons/westworld.jpg"));
     });
   }
 
